@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import Header from '../Header';
+
 import "./App.css";
 
-import Header from '../Header';
 
 class App extends Component {
 
@@ -21,24 +22,24 @@ class App extends Component {
 	}
 
 	render() {
-		console.log(this.state);
-
-
-			
 		return (
-			<div>
+			<div className="page">
+				<Header/>
+				
 				
 				<div className="container">
-					{this.state.products.map(item => (
+					{
+						this.state.products.map(item => (
 						<ul key={item.id}>
 							<li>Name: {item.name}</li>
 							<li>Info: {item.info}</li>
 							<li>Price: {item.price}</li>
 						</ul>
-					))}
+					))
+					}
 				</div>
 			</div>
-		)
+		);
 	}
 }
 

@@ -3,10 +3,10 @@ import './Logo.css';
 
 const Logo = () => {
 	return (
-		<div>
-			<img></img>
+		<div className="logo">
+			<h1>Logo</h1>
 		</div>
-	)
+	);
 }
 
 export default Logo;

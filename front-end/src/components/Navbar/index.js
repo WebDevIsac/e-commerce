@@ -4,11 +4,12 @@ import './Navbar.css';
 const Navbar = () => {
 	return (
 		<nav>
-			<ul>
-				<li></li>
-			</ul>
+			<li><a href="https://google.com">News</a></li>
+			<li><a href="https://google.com">Shop</a></li>
+			<li><a href="https://google.com">Categories</a></li>
+			<li><a href="https://google.com">Contact</a></li>
 		</nav>
-	)
+	);
 }
 
 export default Navbar;

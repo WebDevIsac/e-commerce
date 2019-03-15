@@ -1,0 +1,24 @@
+nav {
+	display: flex;
+	height: 100%;
+	width: 75%;
+	justify-content: space-around;
+	align-items: center;
+}
+
+nav li {
+	list-style-type: none;
+}
+
+nav li a {
+	text-decoration: none;
+	font-size: 1.5rem;
+	font-variant-caps: all-petite-caps;
+	padding: 1.2rem;
+	color: #000000;
+	transition: 0.5s color;
+}
+
+nav li a:hover {
+	color: #ffffff;
+}

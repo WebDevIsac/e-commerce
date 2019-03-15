@@ -1,0 +1,10 @@
+.logo {
+	width: 25%;
+	padding-left: 4rem;
+	text-align: left;
+}
+
+.logo h1 {
+	font-size: 3rem;
+	font-variant-caps: all-petite-caps;
+}
