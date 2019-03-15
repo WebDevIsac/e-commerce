@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import "./App.css";
 
+import Header from '../Header';
+
 class App extends Component {
 	render() {
 		let products = [];
@@ -10,10 +12,13 @@ class App extends Component {
 			.then(data => products.push(...data));
 			
 		return (
-			<div className="App">
-				<h1></h1>
+			<div>
+				<Header/>
+				<div className="container">
+					<h1>Hello</h1>
+				</div>
 			</div>
-		);
+		)
 	}
 }
 
