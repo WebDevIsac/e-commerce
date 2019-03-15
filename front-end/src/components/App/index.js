@@ -4,18 +4,38 @@ import "./App.css";
 import Header from '../Header';
 
 class App extends Component {
-	render() {
-		let products = [];
 
+	state = {
+		products: []
+	}
+
+	componentDidMount() {
 		fetch("http://localhost:63469/api/products")
 			.then(respone => respone.json())
-			.then(data => products.push(...data));
+			.then(data => (
+				this.setState({
+					products: data
+				})
+			));
+
+	}
+
+	render() {
+		console.log(this.state);
+
+
 			
 		return (
 			<div>
-				<Header/>
+				
 				<div className="container">
-					<h1>Hello</h1>
+					{this.state.products.map(item => (
+						<ul key={item.id}>
+							<li>Name: {item.name}</li>
+							<li>Info: {item.info}</li>
+							<li>Price: {item.price}</li>
+						</ul>
+					))}
 				</div>
 			</div>
 		)

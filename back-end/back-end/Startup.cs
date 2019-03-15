@@ -40,6 +40,10 @@ namespace back_end
                 app.UseHsts();
             }
 
+            app.UseCors(
+                options => options.WithOrigins("*").AllowAnyMethod()
+            );
+
             app.UseHttpsRedirection();
             app.UseMvc();
         }

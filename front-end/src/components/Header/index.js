@@ -4,8 +4,6 @@ import './Header.css';
 const Header = () => {
 	return (
 		<header>
-			<Logo/>
-			<Navbar/>
 		</header>
 	)
 }
