@@ -14,11 +14,26 @@ nav li a {
 	text-decoration: none;
 	font-size: 1.5rem;
 	font-variant-caps: all-petite-caps;
-	padding: 1.2rem;
+	padding: 0.8rem;
 	color: #000000;
 	transition: 0.5s color;
 }
 
+nav li a::after {
+	content: '';
+	display: block;
+	width: 0;
+	height: 0.15rem;
+	background: #000;
+	transition: 0.5s;
+	margin-left: 0%;
+}
+
 nav li a:hover {
 	color: #ffffff;
+}
+
+nav li a:hover::after {
+	background: #fff;
+	width: 80%;
 }
