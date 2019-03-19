@@ -38,12 +38,12 @@ namespace back_end.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{product_id}")]
         [ProducesResponseType(typeof(List<Product>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get(int id)
+        public IActionResult Get(int product_id)
         {
-            var result = this.productsService.Get(id);
+            var result = this.productsService.Get(product_id);
 
             if (result == null)
             {
@@ -68,12 +68,12 @@ namespace back_end.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{product_id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int product_id)
         {
-            var result = this.productsService.Delete(id);
+            var result = this.productsService.Delete(product_id);
 
             if (result)
             {

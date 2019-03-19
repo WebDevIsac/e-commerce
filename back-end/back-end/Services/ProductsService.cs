@@ -22,14 +22,14 @@ namespace back_end.Services
             return this.productsRepository.Get();
         }
 
-        public Product Get(int id)
+        public Product Get(int product_id)
         {
-            if (id < 1)
+            if (product_id < 1)
             {
                 return null;
             }
 
-            return this.productsRepository.Get(id);
+            return this.productsRepository.Get(product_id);
         }
 
         public bool Add(Product product)
@@ -44,11 +44,11 @@ namespace back_end.Services
             return false;
         }
 
-        public bool Delete(int id)
+        public bool Delete(int product_id)
         {
-            if (id >= 1)
+            if (product_id >= 1)
             {
-                var result = this.productsRepository.Delete(id);
+                var result = this.productsRepository.Delete(product_id);
 
                 if (result)
                 {
