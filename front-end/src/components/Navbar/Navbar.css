@@ -33,7 +33,7 @@
 	top: 0;
 	width: 50%;
 	height: 100%;
-	background-color: rgba(173, 216, 230, 0.418);
+	background-color: #add8e6d3;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
@@ -58,27 +58,6 @@
 	font-size: 1.5rem;
 }
 
-.menu li a::after {
-	content: '';
-	display: block;
-	width: 0;
-	height: 0.15rem;
-	background: #000;
-	transition: 0.5s;
-	margin-left: -10%;
-}
-
-.menu li a:hover {
-	color: grey;
-}
-
-.menu li a:hover::after {
-	background: grey;
-	width: 120%;
-}
-
-
-
 @media only screen and (min-width: 800px) {
 	.burger-menu {
 		display: none;
@@ -100,7 +79,7 @@
 	}
 	
 	.menu li a {
-		font-size: 1.5rem;
+		font-size: 1.8rem;
 	}
 	
 	.menu li a::after {

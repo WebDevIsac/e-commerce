@@ -1,6 +1,9 @@
 header {
+	position: fixed;
+	top: 0;
+	width: 100%;
 	display: flex;
-	background: #c0c0c0;
+	background: #add8e6;
 	height: 4rem;
 	padding: 0 2rem;
 	justify-content: space-between;
