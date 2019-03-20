@@ -17,11 +17,6 @@ namespace back_end.Services
             this.cartRepository = cartRepository;
         }
 
-        public List<Cart> Get()
-        {
-            return this.cartRepository.Get();
-        }
-
         public Cart Get(int CartId)
         {
             if (CartId < 1)
@@ -32,16 +27,23 @@ namespace back_end.Services
             return this.cartRepository.Get(CartId);
         }
 
-        public bool Add(Cart cart)
+        public Cart Create(int ProductId, int Quantity)
         {
-            var result = this.cartRepository.Add(cart);
+            var CartId = cartRepository.Create();
+            cartRepository.Add(CartId, ProductId, Quantity);
 
-            if (result)
-            {
-                return true;
-            }
+            var NewCart = cartRepository.Get(CartId);
 
-            return false;
+            return NewCart;
+        }
+
+        public Cart Add(int CartId, int ProductId, int Quantity)
+        {
+            cartRepository.Add(CartId, ProductId, Quantity);
+
+            var Cart = cartRepository.Get(CartId);
+
+            return Cart;
         }
 
         public bool Delete(int CartId)

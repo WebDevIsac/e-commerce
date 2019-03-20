@@ -24,20 +24,6 @@ namespace back_end.Controllers
             this.cartService = new CartService(new CartRepository(connectionString));
         }
 
-        [HttpGet]
-        [ProducesResponseType(typeof(List<Cart>), StatusCodes.Status200OK)]
-        public IActionResult Get()
-        {
-            var result = this.cartService.Get();
-
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(result);
-        }
-
         [HttpGet("{CartId}")]
         [ProducesResponseType(typeof(List<Cart>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

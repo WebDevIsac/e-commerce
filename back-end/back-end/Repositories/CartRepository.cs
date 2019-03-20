@@ -17,15 +17,6 @@ namespace back_end.Repositories
             this.connectionString = connectionString;
         }
 
-        public List<Cart> Get()
-        {
-            using (var connection = new SqlConnection(this.connectionString))
-            {
-                var cart = connection.Query<Cart>("SELECT * FROM Cart").ToList();
-                return cart;
-            }
-        }
-
         public Cart Get(int CartId)
         {
             using (var connection = new SqlConnection(this.connectionString))
@@ -36,7 +27,20 @@ namespace back_end.Repositories
                 {
                     return null;
                 }
+
+                singleCart.Products = connection.Query<Product>("SELECT * FROM CartItems c INNER JOIN Products p ON c.ProductId = p.ProductId WHERE c.CartId = @CartId", new { CartId }).ToList();
+
                 return singleCart;
+            }
+        }
+
+        public int Create()
+        {
+            using (var connection = new SqlConnection(this.connectionString))
+            {
+                connection.Execute("INSERT INTO Cart(TotalPrice) VALUES(0)");
+                var CartId = connection.QuerySingleOrDefault<int>("SELECT CartId FROM Cart ORDER BY CardId DESC LIMIT 1");
+                return CartId;
             }
         }
 
@@ -46,13 +50,12 @@ namespace back_end.Repositories
             using (var connection = new SqlConnection(this.connectionString))
             {
                 var checkCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM Cart WHERE CartId = @CartId", new { cart.CartId });
+
                 if (checkCart == null)
                 {
                     connection.Execute("INSERT INTO Cart (TotalPrice, CustomerId) VALUES(@TotalPrice, @CustomerId)", cart);
                     return true;
                 }
-
-                //connection.Execute("UPDATE");
 
                 return false;
             }

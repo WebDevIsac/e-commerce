@@ -11,4 +11,5 @@
 	padding: 1rem;
 	border-radius: 100%;
 	cursor: pointer;
+	outline: 0;
 }
