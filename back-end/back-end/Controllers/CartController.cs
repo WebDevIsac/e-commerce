@@ -13,22 +13,22 @@ namespace back_end.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ProductsController : Controller
+    public class CartController : Controller
     {
         private readonly string connectionString;
-        private readonly ProductsService productsService;
+        private readonly CartService cartService;
 
-        public ProductsController(IConfiguration configuration)
+        public CartController(IConfiguration configuration)
         {
             this.connectionString = configuration.GetConnectionString("ConnectionString");
-            this.productsService = new ProductsService(new ProductsRepository(connectionString));
+            this.cartService = new CartService(new CartRepository(connectionString));
         }
 
         [HttpGet]
-        [ProducesResponseType(typeof(List<Product>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<Cart>), StatusCodes.Status200OK)]
         public IActionResult Get()
         {
-            var result = this.productsService.Get();
+            var result = this.cartService.Get();
 
             if (result == null)
             {
@@ -38,12 +38,12 @@ namespace back_end.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{ProductId}")]
-        [ProducesResponseType(typeof(List<Product>), StatusCodes.Status200OK)]
+        [HttpGet("{CartId}")]
+        [ProducesResponseType(typeof(List<Cart>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get(int ProductId)
+        public IActionResult Get(int CartId)
         {
-            var result = this.productsService.Get(ProductId);
+            var result = this.cartService.Get(CartId);
 
             if (result == null)
             {
@@ -56,9 +56,9 @@ namespace back_end.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody]Product product)
+        public IActionResult Post([FromBody]Cart cart)
         {
-            var result = this.productsService.Add(product);
+            var result = this.cartService.Add(cart);
 
             if (result)
             {
@@ -68,12 +68,12 @@ namespace back_end.Controllers
             return BadRequest();
         }
 
-        [HttpDelete("{ProductId}")]
+        [HttpDelete("{CartId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Delete(int ProductId)
+        public IActionResult Delete(int CartId)
         {
-            var result = this.productsService.Delete(ProductId);
+            var result = this.cartService.Delete(CartId);
 
             if (result)
             {

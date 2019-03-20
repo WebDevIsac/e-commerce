@@ -3,19 +3,19 @@ import CartIcon from '../CartIcon';
 
 import './ProductContainer.css';
 
-const ProductContainer = (product) => {
+const ProductContainer = (props) => {
 
 	const handleButtonClick = () => {
-		console.log('Add ' + product.name);
+		console.log('Add ' + props.name);
 	}
 
 	return (
 		<div className="product-container">
-			<h1>{product.name}</h1>
-			<img src={product.image} alt={product.name}></img>
-			<h3>{product.info}</h3>
+			<h1>{props.name}</h1>
+			<img src={props.image} alt={props.name}></img>
+			<h3>{props.info}</h3>
 			<div className="product-price">
-				<h2>{product.price}:-</h2>
+				<h2>{props.price}:-</h2>
 				<button onClick={handleButtonClick}>
 					<CartIcon width="24px" height="24px"/>
 				</button>

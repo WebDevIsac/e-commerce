@@ -25,7 +25,9 @@ class ProductsList extends Component {
 			<div className="products-list">
 				{
 					this.state.products.map(product => (
-						<ProductContainer key={product.product_id} name={product.name} info={product.info} price={product.price} image={product.image}></ProductContainer>
+						<ProductContainer 
+							key={product.product_id} name={product.name} info={product.info} price={product.price} image={product.image}
+						/>
 					))
 				}
 			</div>
