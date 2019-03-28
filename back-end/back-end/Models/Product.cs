@@ -10,10 +10,11 @@ namespace back_end.Models
 {
     public class Product
     {
-        public int ProductId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Info { get; set; }
         public int Price { get; set; }
         public string Image { get; set; }
+        public int Quantity { get; set; }
     }
 }

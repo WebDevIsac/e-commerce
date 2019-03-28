@@ -17,18 +17,18 @@ namespace back_end.Repositories
             this.connectionString = connectionString;
         }
 
-        public Cart Get(int CartId)
+        public Cart Get(int id)
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var singleCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM Cart WHERE CartId = @CartId", new { CartId });
+                var singleCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM Cart WHERE Id = @id", new { id });
 
                 if (singleCart == null)
                 {
                     return null;
                 }
 
-                singleCart.Products = connection.Query<Product>("SELECT * FROM CartItems c INNER JOIN Products p ON c.ProductId = p.ProductId WHERE c.CartId = @CartId", new { CartId }).ToList();
+                singleCart.Products = connection.Query<Product>("SELECT * FROM CartItems c INNER JOIN Products p ON c.ProductId = p.Id WHERE c.CartId = @id", new { id }).ToList();
 
                 return singleCart;
             }
@@ -39,21 +39,23 @@ namespace back_end.Repositories
             using (var connection = new SqlConnection(this.connectionString))
             {
                 connection.Execute("INSERT INTO Cart(TotalPrice) VALUES(0)");
-                var CartId = connection.QuerySingleOrDefault<int>("SELECT CartId FROM Cart ORDER BY CardId DESC LIMIT 1");
+
+                var CartId = connection.QuerySingleOrDefault<int>("SELECT Id FROM Cart ORDER BY Id DESC LIMIT 1");
+
                 return CartId;
             }
         }
 
-        public bool Add(Cart cart)
+        public bool Add(CartItem cartItem)
         {
 
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var checkCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM Cart WHERE CartId = @CartId", new { cart.CartId });
+                var checkCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM CartItems WHERE CartId = @CartId", new { cartItem.CartId });
 
                 if (checkCart == null)
                 {
-                    connection.Execute("INSERT INTO Cart (TotalPrice, CustomerId) VALUES(@TotalPrice, @CustomerId)", cart);
+                    connection.Execute("INSERT INTO CartItems (CartId, ProductId, Quantity) VALUES(@CartId, @ProductId, @Quantity)", cartItem);
                     return true;
                 }
 
@@ -62,20 +64,19 @@ namespace back_end.Repositories
 
         }
 
-        public bool Delete(int CartId)
+        public void Delete(int cartId, int productId)
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var singleCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM Cart WHERE CartId = @CartId", new { CartId });
+                connection.Execute("DELETE FROM CartItems WHERE CartId = @cartId AND ProductId = @productId", new { cartId, productId });
+            }
+        }
 
-                if (singleCart == null)
-                {
-                    return false;
-                }
-
-                connection.Execute("DELETE FROM Cart WHERE CartId = @CartId", new { CartId });
-
-                return true;
+        public void Update(int cartId, int productId, int quantity)
+        {
+            using (var connection = new SqlConnection(this.connectionString))
+            {
+                connection.Execute("UPDATE CartItems SET Quantity = @quantity WHERE CartId = @cartId AND ProductId = @productId", new { quantity, cartId, productId});
             }
         }
     }

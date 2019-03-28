@@ -24,41 +24,41 @@ namespace back_end.Services
                 return null;
             }
 
-            return this.cartRepository.Get(CartId);
+            return cartRepository.Get(CartId);
         }
 
-        public Cart Create(int ProductId, int Quantity)
+        public Cart Create(CartItem cartItem)
         {
-            var CartId = cartRepository.Create();
-            cartRepository.Add(CartId, ProductId, Quantity);
+            var cartId = cartRepository.Create();
 
-            var NewCart = cartRepository.Get(CartId);
+            cartItem.CartId = cartId;
+            cartRepository.Add(cartItem);
 
-            return NewCart;
+            var newCart = cartRepository.Get(cartId);
+
+            return newCart;
         }
 
-        public Cart Add(int CartId, int ProductId, int Quantity)
+        public Cart Add(CartItem cartItem)
         {
-            cartRepository.Add(CartId, ProductId, Quantity);
+            cartRepository.Add(cartItem);
 
-            var Cart = cartRepository.Get(CartId);
+            var cart = cartRepository.Get(cartItem.CartId);
 
-            return Cart;
+            return cart;
         }
 
-        public bool Delete(int CartId)
+        public void Delete(int cartId, int productId)
         {
-            if (CartId >= 1)
+            if (cartId >= 1 && productId >= 1)
             {
-                var result = this.cartRepository.Delete(CartId);
-
-                if (result)
-                {
-                    return true;
-                }
+                this.cartRepository.Delete(cartId, productId);
             }
+        }
 
-            return false;
+        public void Update(int cartId, int productId, int quantity)
+        {
+            cartRepository.Update(cartId, productId, quantity);
         }
     }
 }

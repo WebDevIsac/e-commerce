@@ -28,11 +28,11 @@ namespace back_end.Repositories
             }
         }
 
-        public Product Get(int ProductId)
+        public Product Get(int id)
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var productItem = connection.QuerySingleOrDefault<Product>("SELECT * FROM Products WHERE ProductId = @ProductId", new { ProductId });
+                var productItem = connection.QuerySingleOrDefault<Product>("SELECT * FROM Products WHERE Id = @id", new { id });
 
                 if (productItem == null)
                 {
@@ -51,25 +51,25 @@ namespace back_end.Repositories
 
             using (var connection = new SqlConnection(this.connectionString))
             {
-                connection.Execute("INSERT INTO Products (Name, Info, Price, Image) VALUES(@name, @info, @price, @image)", product);
+                connection.Execute("INSERT INTO Products (Name, Info, Price, Image) VALUES(@Name, @Info, @Price, @Image)", product);
 
                 return true;
             }
 
         }
 
-        public bool Delete(int ProductId)
+        public bool Delete(int id)
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var productItem = connection.QuerySingleOrDefault<Product>("SELECT * FROM Products WHERE ProductId = @ProductId", new { ProductId });
+                var productItem = connection.QuerySingleOrDefault<Product>("SELECT * FROM Products WHERE Id = @id", new { id });
 
                 if (productItem == null)
                 {
                     return false;
                 }
 
-                connection.Execute("DELETE FROM Products WHERE ProductId = @ProductId", new { ProductId });
+                connection.Execute("DELETE FROM Products WHERE Id = @id", new { id });
 
                 return true;
             }

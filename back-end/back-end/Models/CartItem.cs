@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 
 namespace back_end.Models
 {
-    public class Cart
+    public class CartItem
     {
         public int Id { get; set; }
-        public int TotalPrice { get; set; }
-        public int CustomerId { get; set; }
-        public List<Product> Products { get; set; }
+        public int ProductId { get; set; }
+        public int CartId { get; set; }
+        public int Quantity { get; set; }
     }
 }

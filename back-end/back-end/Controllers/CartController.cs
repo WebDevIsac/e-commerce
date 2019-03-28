@@ -24,12 +24,12 @@ namespace back_end.Controllers
             this.cartService = new CartService(new CartRepository(connectionString));
         }
 
-        [HttpGet("{CartId}")]
+        [HttpGet("{id}")]
         [ProducesResponseType(typeof(List<Cart>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Get(int CartId)
+        public IActionResult Get(int id)
         {
-            var result = this.cartService.Get(CartId);
+            var result = this.cartService.Get(id);
 
             if (result == null)
             {
@@ -42,31 +42,30 @@ namespace back_end.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody]Cart cart)
+        public IActionResult Post([FromBody]CartItem cartItem)
         {
-            var result = this.cartService.Add(cart);
-
-            if (result)
+            if (cartItem.CartId < 1)
             {
-                return Ok();
+                var cart = cartService.Create(cartItem);
+                return Ok(cart);
             }
+            
+            else
+            {
+                var cart = cartService.Add(cartItem);
 
-            return BadRequest();
+                return Ok(cart);
+            }
         }
 
         [HttpDelete("{CartId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public IActionResult Delete(int CartId)
+        public IActionResult Delete([FromBody]CartItem cartItem)
         {
-            var result = this.cartService.Delete(CartId);
-
-            if (result)
-            {
-                return Ok();
-            }
-
-            return NotFound();
+            cartService.Delete(cartItem.ProductId, cartItem.CartId);
+            return Ok();
+            
         }
     }
 }
