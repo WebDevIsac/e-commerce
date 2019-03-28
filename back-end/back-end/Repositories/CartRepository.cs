@@ -38,11 +38,11 @@ namespace back_end.Repositories
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                connection.Execute("INSERT INTO Cart(TotalPrice) VALUES(0)");
+                int cartId = connection.QuerySingleOrDefault<int>(
+                                        @"INSERT INTO Cart(TotalPrice, CustomerId) VALUES(0, 1)
+                                            SELECT SCOPE_IDENTITY()");
 
-                var CartId = connection.QuerySingleOrDefault<int>("SELECT Id FROM Cart ORDER BY Id DESC LIMIT 1");
-
-                return CartId;
+                return cartId;
             }
         }
 
@@ -51,15 +51,8 @@ namespace back_end.Repositories
 
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var checkCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM Cart WHERE Id = @CartId", new { cartItem.CartId });
-
-                if (checkCart == null)
-                {
-                    connection.Execute("INSERT INTO CartItems (CartId, ProductId, Quantity) VALUES(@CartId, @ProductId, @Quantity)", cartItem);
-                    return true;
-                }
-
-                return false;
+                connection.Execute("INSERT INTO CartItems (CartId, ProductId, Quantity) VALUES(@CartId, @ProductId, @Quantity)", cartItem);
+                return true;
             }
 
         }

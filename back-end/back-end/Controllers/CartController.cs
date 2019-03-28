@@ -42,9 +42,10 @@ namespace back_end.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody]CartItem cartItem)
+        public IActionResult Add([FromBody]CartItem cartItem)
         {
-            if (cartItem.CartId < 1)
+            var result = this.cartService.Get(cartItem.CartId);
+            if (result == null)
             {
                 var cart = cartService.Create(cartItem);
                 return Ok(cart);

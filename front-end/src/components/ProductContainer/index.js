@@ -6,9 +6,26 @@ import './ProductContainer.css';
 class ProductContainer extends Component {
 	render() {
 		const handleButtonClick = () => {
+			const product = {
+				productId: this.props.productId,
+				cartId: 2,
+				quantity: 1
+			}
 			console.log('Add ' + this.props.name);
+
+			fetch("http://localhost:63469/api/cart", {
+					method: 'POST',
+					headers: {
+						'Accept': 'application/json',
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify( product )
+				})
+				.then(response => response.json())
+				.then(data => {
+					console.log(data);
+				});
 		}
-	
 		return (
 			<div className="product-container">
 				<h2>{this.props.name}</h2>
