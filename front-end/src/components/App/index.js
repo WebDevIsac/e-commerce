@@ -9,11 +9,12 @@ import "./App.css";
 
 class App extends Component {
 	state = {
+		id: 1,
 		cart: []
 	}
 	
 	componentDidMount() {
-		const api = "http://localhost:63469/api/cart";
+		const api = `http://localhost:63469/api/cart/${this.state.id}`;
 		fetch(api)
 			.then(response => response.json())
 			.then(data => {

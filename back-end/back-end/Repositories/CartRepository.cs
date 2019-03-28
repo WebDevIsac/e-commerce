@@ -51,7 +51,7 @@ namespace back_end.Repositories
 
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var checkCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM CartItems WHERE CartId = @CartId", new { cartItem.CartId });
+                var checkCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM Cart WHERE Id = @CartId", new { cartItem.CartId });
 
                 if (checkCart == null)
                 {
