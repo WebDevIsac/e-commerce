@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from '../Header';
-import ProductsList from '../ProductsList';
 import CartButton from "../CartButton";
+import ProductContainer from '../ProductContainer';
 
 import "./App.css";
 
@@ -9,35 +9,55 @@ import "./App.css";
 
 class App extends Component {
 	state = {
-		id: 1,
+		products: [],
+		cartId: 33,
 		cart: [],
 		isFetched: false
 	}
-
 	
 	componentDidMount() {
-		const api = `http://localhost:63469/api/cart/${this.state.id}`;
-		fetch(api)
+		const apiProducts = "http://localhost:63469/api/products";
+		fetch(apiProducts)
 			.then(response => response.json())
 			.then(data => {
 				this.setState({
-					cart: data,
-					isFetched: true
+					products: data
 				});
 			});
+		this.updateCart();
 		}
 		
-	
-	render() {
-
-		console.log(this.state.cart);
-		return (
-			<div className="page">
-				<Header/>
-				<ProductsList cartId={this.state.cart.id}/>
-				<CartButton amount={this.state.isFetched ? this.state.cart.products.length : 0}/>
-			</div>
-		);
+		updateCart = () => {
+			const apiCart = `http://localhost:63469/api/cart/${this.state.cartId}`;
+			fetch(apiCart)
+				.then(response => response.json())
+				.then(data => {
+					this.setState({
+						cart: data,
+						isFetched: true
+					});
+				});
+		}
+		
+		render() {
+			
+			// console.log(this.state.cart);
+			
+			return (
+				<div className="page">
+					<Header/>
+					<div className="products-list">
+					{
+						this.state.products.map(product => (
+							<ProductContainer 
+								key={product.id} product={product} cart={this.state.cart} update={this.updateCart}
+							/>
+						))
+					}
+					</div>
+					<CartButton amount={this.state.isFetched ? this.state.cart.products.length : 0}/>
+				</div>
+			);
 	}
 }
 

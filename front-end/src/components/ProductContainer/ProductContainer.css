@@ -20,12 +20,20 @@
 }
 
 .product-container .product-price {
-	width: 8rem;
+	width: 12rem;
 	display: flex; 
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	margin-top: 1rem;
+}
+
+.product-container .product-price input {
+	outline: 0;
+	width: 25%;
+	border: 2px solid black;
+	text-align: center;
+	font-size: 20px;
 }
 
 .product-container .product-price button {

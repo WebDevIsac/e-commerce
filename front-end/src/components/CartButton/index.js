@@ -7,9 +7,7 @@ const CartButton = ({amount}) => {
 	return (
 		<button className="cart-button">
 			<CartIcon width="60px" height="60px"/>
-			{
-				amount && <small>{amount}</small>
-			}
+			<small>{amount ? amount : 0}</small>
 		</button>
 	);
 };
