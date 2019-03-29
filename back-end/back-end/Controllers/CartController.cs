@@ -59,6 +59,15 @@ namespace back_end.Controllers
             }
         }
 
+        [HttpPost("{CartId}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public IActionResult Update(CartItem cartItem)
+        {
+            cartService.Update(cartItem.CartId, cartItem.ProductId, cartItem.Quantity);
+            return Ok();
+        }
+
         [HttpDelete("{CartId}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
