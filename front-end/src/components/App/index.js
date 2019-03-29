@@ -10,8 +10,10 @@ import "./App.css";
 class App extends Component {
 	state = {
 		id: 1,
-		cart: []
+		cart: [],
+		isFetched: false
 	}
+
 	
 	componentDidMount() {
 		const api = `http://localhost:63469/api/cart/${this.state.id}`;
@@ -19,18 +21,21 @@ class App extends Component {
 			.then(response => response.json())
 			.then(data => {
 				this.setState({
-					cart: data
+					cart: data,
+					isFetched: true
 				});
 			});
-	}
+		}
+		
 	
 	render() {
+
 		console.log(this.state.cart);
 		return (
 			<div className="page">
 				<Header/>
-				<ProductsList/>
-				<CartButton/>
+				<ProductsList cartId={this.state.cart.id}/>
+				<CartButton amount={this.state.isFetched ? this.state.cart.products.length : 0}/>
 			</div>
 		);
 	}
