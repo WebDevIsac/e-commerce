@@ -30,42 +30,24 @@ class ProductContainer extends Component {
 			cartId: this.props.cart.id,
 			quantity: this.state.quantity
 		}
-
-		// let checkProduct = this.state.cart.products.filter(product => {
-		// 	return newProduct.productId === product ? true : false;
-		// })
-		const checkCart = this.state.cart.products.some(product => product.id === newProduct.productId);
-
-		if (checkCart) {
-			fetch("http://localhst:63469/api/cart", {
-				method: 'UPDATE',
-				header: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.setTimeout( newProduct )
-			})
-		} else {
-
-		}
-
+		
 		fetch("http://localhost:63469/api/cart", {
-				method: 'POST',
-				headers: {
-					'Accept': 'application/json',
-					'Content-Type': 'application/json'
-				},
-				body: JSON.stringify( newProduct )
-			})
-			.then(response => response.json())
-			.then(data => {
-				this.setState({
-					cart: data
-				}, () => {
-					this.props.update();
-				});
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify( newProduct )
+		})
+		.then(response => response.json())
+		.then(data => {
+			this.setState({
+				cart: data
+			}, () => {
+				this.props.update();
 			});
-		}
+		});
+	}
 
 	render() {
 		const product = this.props.product;

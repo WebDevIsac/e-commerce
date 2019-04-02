@@ -53,29 +53,26 @@ namespace back_end.Controllers
             
             else
             {
-                var cart = cartService.Add(cartItem);
-
-                return Ok(cart);
+                if (result.Products.Any(product => product.Id == cartItem.ProductId))
+                {
+                    var cart = cartService.Update(cartItem);
+                    return Ok(cart);
+                }
+                else 
+                {
+                    var cart = cartService.Add(cartItem);
+                    return Ok(cart);
+                }
             }
         }
 
-        [HttpPost("{CartId}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult Update(CartItem cartItem)
-        {
-            cartService.Update(cartItem.CartId, cartItem.ProductId, cartItem.Quantity);
-            return Ok();
-        }
-
-        [HttpDelete("{CartId}")]
+        [HttpDelete]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete([FromBody]CartItem cartItem)
         {
             cartService.Delete(cartItem.ProductId, cartItem.CartId);
             return Ok();
-            
         }
     }
 }

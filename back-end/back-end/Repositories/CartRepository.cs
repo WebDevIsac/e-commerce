@@ -65,11 +65,16 @@ namespace back_end.Repositories
             }
         }
 
-        public void Update(int cartId, int productId, int quantity)
+        public bool Update(CartItem cartItem)
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                connection.Execute("UPDATE CartItems SET Quantity = @quantity WHERE CartId = @cartId AND ProductId = @productId", new { quantity, cartId, productId});
+                var cart = this.Get(cartItem.CartId);
+                var product = cart.Products.SingleOrDefault(item => item.Id == cartItem.ProductId);
+                cartItem.Quantity = cartItem.Quantity + product.Quantity;
+
+                connection.Execute("UPDATE CartItems SET Quantity = @quantity WHERE CartId = @cartId AND ProductId = @productId", cartItem);
+                return true;
             }
         }
     }

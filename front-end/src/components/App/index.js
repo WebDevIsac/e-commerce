@@ -10,7 +10,7 @@ import "./App.css";
 class App extends Component {
 	state = {
 		products: [],
-		cartId: 33,
+		cartId: 1,
 		cart: [],
 		isFetched: false
 	}
@@ -24,7 +24,7 @@ class App extends Component {
 					products: data
 				});
 			});
-		this.updateCart();
+			this.updateCart();
 		}
 		
 		updateCart = () => {

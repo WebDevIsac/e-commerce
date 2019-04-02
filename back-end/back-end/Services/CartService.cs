@@ -56,9 +56,13 @@ namespace back_end.Services
             }
         }
 
-        public void Update(int cartId, int productId, int quantity)
+        public Cart Update(CartItem cartItem)
         {
-            cartRepository.Update(cartId, productId, quantity);
+            cartRepository.Update(cartItem);
+
+            var cart = cartRepository.Get(cartItem.CartId);
+
+            return cart;
         }
     }
 }
