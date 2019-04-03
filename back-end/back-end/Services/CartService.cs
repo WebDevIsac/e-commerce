@@ -48,11 +48,11 @@ namespace back_end.Services
             return cart;
         }
 
-        public void Delete(int cartId, int productId)
+        public void Delete(CartItem cartItem)
         {
-            if (cartId >= 1 && productId >= 1)
+            if (cartItem.CartId >= 1 && cartItem.ProductId >= 1)
             {
-                this.cartRepository.Delete(cartId, productId);
+                cartRepository.Delete(cartItem);
             }
         }
 

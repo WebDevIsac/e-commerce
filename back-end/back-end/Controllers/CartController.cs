@@ -71,7 +71,8 @@ namespace back_end.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult Delete([FromBody]CartItem cartItem)
         {
-            cartService.Delete(cartItem.ProductId, cartItem.CartId);
+            cartService.Delete(cartItem);
+
             return Ok();
         }
     }

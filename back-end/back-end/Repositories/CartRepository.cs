@@ -52,16 +52,17 @@ namespace back_end.Repositories
             using (var connection = new SqlConnection(this.connectionString))
             {
                 connection.Execute("INSERT INTO CartItems (CartId, ProductId, Quantity) VALUES(@CartId, @ProductId, @Quantity)", cartItem);
+
                 return true;
             }
 
         }
 
-        public void Delete(int cartId, int productId)
+        public void Delete(CartItem cartItem)
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                connection.Execute("DELETE FROM CartItems WHERE CartId = @cartId AND ProductId = @productId", new { cartId, productId });
+                connection.Execute("DELETE FROM CartItems WHERE CartId = @CartId AND ProductId = @ProductId", cartItem);
             }
         }
 
