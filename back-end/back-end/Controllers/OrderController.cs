@@ -28,36 +28,6 @@ namespace back_end.Controllers
                 );
         }
 
-        [HttpGet]
-        [ProducesResponseType(typeof(List<Order>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<Order>), StatusCodes.Status404NotFound)]
-        public IActionResult Get()
-        {
-            var result = this.orderService.Get();
-
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(result);
-        }
-
-        [HttpGet("{Id}")]
-        [ProducesResponseType(typeof(List<Order>), StatusCodes.Status200OK)]
-        [ProducesResponseType(typeof(List<Order>), StatusCodes.Status404NotFound)]
-        public IActionResult Get(int id)
-        {
-            var result = this.orderService.Get(id);
-
-            if (result == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(result);
-        }
-
         [HttpPost("{id}")]
         [ProducesResponseType(typeof(Order), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Order), StatusCodes.Status400BadRequest)]

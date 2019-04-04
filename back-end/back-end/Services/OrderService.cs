@@ -21,21 +21,6 @@ namespace back_end.Services
             this.customerRepository = customerRepository;
         }
 
-        public List<Order> Get()
-        {
-            return orderRepository.Get();
-        }
-
-        public Order Get(int id)
-        {
-            var order = orderRepository.Get(id);
-
-            order.Cart = cartRepository.Get(order.CartId);
-            order.Customer = customerRepository.Get(order.CustomerId);
-
-            return order;
-        }
-
         public Order Create(int id, Customer customer)
         {
             var cart = cartRepository.Get(id);

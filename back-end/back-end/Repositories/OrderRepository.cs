@@ -17,16 +17,6 @@ namespace back_end.Repositories
             this.connectionString = connectionString;
         }
 
-        public List<Order> Get()
-        {
-            using (var connection = new SqlConnection(this.connectionString))
-            {
-                var orders = connection.Query<Order>("SELECT * FROM Orders").ToList();
-
-                return orders;
-            }
-        }
-
         public Order Get(int id)
         {
             using (var connection = new SqlConnection(this.connectionString))
