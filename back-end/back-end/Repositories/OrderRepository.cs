@@ -37,17 +37,15 @@ namespace back_end.Repositories
             }
         }
 
-        public int Create(Cart cart, Customer customer)
+        public int Create(int id, Customer customer)
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                connection.Execute("INSERT INTO Customers (Name, Country, Address, City, Zipcode) VALUES (@Name, @Country, @Address, @City, @Zipcode)", customer);
-
-                var customerId = connection.QuerySingleOrDefault<int>("SELECT Id FROM Customers ORDER BY Id DESC LIMIT 1");
+                int customerId = connection.QuerySingleOrDefault<int>(@"INSERT INTO Customers (Name, Country, Address, City, Zipcode) VALUES (@Name, @Country, @Address, @City, @Zipcode)
+                 SELECT SCOPE_IDENTITY()", customer);
                 
-                connection.Execute("INSERT INTO Orders (CartId, CustomerId, TotalPrice) VALUES (@cartId, @customerId, 0)", new { cart.Id, customerId });
-
-                var orderId = connection.QuerySingleOrDefault<int>("SELECT Id FROM Orders ORDER BY DESC LIMIT 1");
+                int orderId = connection.QuerySingleOrDefault<int>(@"INSERT INTO Orders (CartId, CustomerId, TotalPrice) VALUES (@id, @customerId, 0)
+                    SELECT SCOPE_IDENTITY()", new { id, customerId });
 
                 return orderId;
             }

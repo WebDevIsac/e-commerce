@@ -36,12 +36,16 @@ namespace back_end.Services
             return order;
         }
 
-        public Order Create(Cart cart, Customer customer)
+        public Order Create(int id, Customer customer)
         {
-            var orderId = orderRepository.Create(cart, customer);
+            var cart = cartRepository.Get(id);
+
+            var orderId = orderRepository.Create(id, customer);
+
             var order = orderRepository.Get(orderId);
 
-            order.Cart = cartRepository.Get(order.CartId);
+            order.Cart = cart;
+
             order.Customer = customerRepository.Get(order.CustomerId);
 
             return order;

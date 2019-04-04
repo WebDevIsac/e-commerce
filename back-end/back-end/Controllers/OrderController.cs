@@ -58,12 +58,13 @@ namespace back_end.Controllers
             return Ok(result);
         }
 
-        [HttpPost]
+        [HttpPost("{id}")]
         [ProducesResponseType(typeof(Order), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(Order), StatusCodes.Status400BadRequest)]
-        public IActionResult Post([FromBody]Order order)
+        public IActionResult Post(int id,[FromBody]Customer customer)
         {
-            return Ok(this.orderService.Create(order.Cart, order.Customer));
+            var result = this.orderService.Create(id, customer);
+            return Ok(result);
         }
     }
 }

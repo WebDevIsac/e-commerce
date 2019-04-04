@@ -26,5 +26,14 @@ namespace back_end.Repositories
                 return customer;
             }
         }
+
+        public int Create(Customer customer)
+        {
+            using (var connection = new SqlConnection(this.connectionString))
+            {
+                return connection.QuerySingleOrDefault<int>(@"INSERT INTO Customers (Name, Adress, Country, Address, City, Zipcode) VALUES (@Name, @Adress, @Country, @Address, @City, @Zipcode)
+                                            SELECT SCOPE_IDENTITY()", customer);
+            }
+        }
     }
 }

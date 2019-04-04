@@ -73,7 +73,9 @@ namespace back_end.Controllers
         {
             cartService.Delete(cartItem);
 
-            return Ok();
+            var cart = cartService.Get(cartItem.CartId);
+
+            return Ok(cart);
         }
     }
 }
