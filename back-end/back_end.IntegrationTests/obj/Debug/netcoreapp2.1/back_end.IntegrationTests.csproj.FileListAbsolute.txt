@@ -1,0 +1,12 @@
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\bin\Debug\netcoreapp2.1\back_end.IntegrationTests.deps.json
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\bin\Debug\netcoreapp2.1\back_end.IntegrationTests.dll
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\bin\Debug\netcoreapp2.1\back-end.dll
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\bin\Debug\netcoreapp2.1\back-end.pdb
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\obj\Debug\netcoreapp2.1\back_end.IntegrationTests.csprojAssemblyReference.cache
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\obj\Debug\netcoreapp2.1\back_end.IntegrationTests.csproj.CoreCompileInputs.cache
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\obj\Debug\netcoreapp2.1\back_end.IntegrationTests.AssemblyInfoInputs.cache
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\obj\Debug\netcoreapp2.1\back_end.IntegrationTests.AssemblyInfo.cs
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\obj\Debug\netcoreapp2.1\back_end.IntegrationTests.csproj.CopyComplete
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.dll
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\bin\Debug\netcoreapp2.1\NUnit3.TestAdapter.pdb
+C:\Users\Isac\Documents\Webdev\school\csharp\e-commerce\back-end\back_end.IntegrationTests\bin\Debug\netcoreapp2.1\nunit.engine.netstandard.dll

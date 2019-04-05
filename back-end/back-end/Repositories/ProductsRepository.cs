@@ -32,7 +32,7 @@ namespace back_end.Repositories
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var productItem = connection.QuerySingleOrDefault<Product>("SELECT * FROM Products WHERE Id = @id", new { id });
+                var productItem = connection.QueryFirstOrDefault<Product>("SELECT * FROM Products WHERE Id = @id", new { id });
 
                 if (productItem == null)
                 {
@@ -62,7 +62,7 @@ namespace back_end.Repositories
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var productItem = connection.QuerySingleOrDefault<Product>("SELECT * FROM Products WHERE Id = @id", new { id });
+                var productItem = connection.QueryFirstOrDefault<Product>("SELECT * FROM Products WHERE Id = @id", new { id });
 
                 if (productItem == null)
                 {

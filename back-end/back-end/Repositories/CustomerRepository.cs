@@ -21,7 +21,7 @@ namespace back_end.Repositories
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var customer = connection.QuerySingleOrDefault<Customer>("SELECT * FROM Customers WHERE Id = @id", new { id });
+                var customer = connection.QueryFirstOrDefault<Customer>("SELECT * FROM Customers WHERE Id = @id", new { id });
 
                 return customer;
             }
@@ -31,7 +31,7 @@ namespace back_end.Repositories
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                return connection.QuerySingleOrDefault<int>(@"INSERT INTO Customers (Name, Adress, Country, Address, City, Zipcode) VALUES (@Name, @Adress, @Country, @Address, @City, @Zipcode)
+                return connection.QueryFirstOrDefault<int>(@"INSERT INTO Customers (Name, Adress, Country, Address, City, Zipcode) VALUES (@Name, @Adress, @Country, @Address, @City, @Zipcode)
                                             SELECT SCOPE_IDENTITY()", customer);
             }
         }

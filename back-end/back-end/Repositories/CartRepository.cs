@@ -21,7 +21,7 @@ namespace back_end.Repositories
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                var singleCart = connection.QuerySingleOrDefault<Cart>("SELECT * FROM Cart WHERE Id = @id", new { id });
+                var singleCart = connection.QueryFirstOrDefault<Cart>("SELECT * FROM Cart WHERE Id = @id", new { id });
 
                 if (singleCart == null)
                 {
@@ -38,7 +38,7 @@ namespace back_end.Repositories
         {
             using (var connection = new SqlConnection(this.connectionString))
             {
-                int cartId = connection.QuerySingleOrDefault<int>(
+                int cartId = connection.QueryFirstOrDefault<int>(
                                         @"INSERT INTO Cart(TotalPrice, CustomerId) VALUES(0, 1)
                                             SELECT SCOPE_IDENTITY()");
 
@@ -71,7 +71,7 @@ namespace back_end.Repositories
             using (var connection = new SqlConnection(this.connectionString))
             {
                 var cart = this.Get(cartItem.CartId);
-                var product = cart.Products.SingleOrDefault(item => item.Id == cartItem.ProductId);
+                var product = cart.Products.FirstOrDefault(item => item.Id == cartItem.ProductId);
                 cartItem.Quantity = cartItem.Quantity + product.Quantity;
 
                 connection.Execute("UPDATE CartItems SET Quantity = @quantity WHERE CartId = @cartId AND ProductId = @productId", cartItem);

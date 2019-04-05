@@ -12,7 +12,7 @@ namespace back_end
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Hello(string[] args)
         {
            CreateWebHostBuilder(args).Build().Run();
         }
